@@ -1,0 +1,387 @@
+/* =============================================================================
+   Stocks Plugin — Vanilla CSS
+   Badge styles, popup card, dark mode, responsive
+   ============================================================================= */
+
+/* ── Badge ─────────────────────────────────────────────────── */
+
+.stocks-ticker {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	padding: 3px 8px 3px 6px;
+	border-radius: 4px;
+	font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+	font-size: 0.82em;
+	line-height: 1.4;
+	cursor: pointer;
+	border: 1px solid transparent;
+	transition: background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+	text-decoration: none;
+	white-space: nowrap;
+	user-select: none;
+	vertical-align: middle;
+}
+
+.stocks-ticker.stocks-up {
+	background-color: #f0fdf4;
+	border-color: #86efac;
+	color: #166534;
+}
+
+.stocks-ticker.stocks-down {
+	background-color: #fef2f2;
+	border-color: #fca5a5;
+	color: #991b1b;
+}
+
+.stocks-ticker.stocks-up:hover {
+	background-color: #dcfce7;
+	border-color: #4ade80;
+	box-shadow: 0 2px 8px rgba(22, 101, 52, 0.15);
+}
+
+.stocks-ticker.stocks-down:hover {
+	background-color: #fee2e2;
+	border-color: #f87171;
+	box-shadow: 0 2px 8px rgba(153, 27, 27, 0.15);
+}
+
+.stocks-ticker.stocks-error {
+	background-color: #f9fafb;
+	border-color: #d1d5db;
+	color: #6b7280;
+	cursor: default;
+}
+
+.stocks-ticker.stocks-nodata {
+	background-color: #f9fafb;
+	border-color: #e5e7eb;
+	color: #9ca3af;
+}
+
+.stocks-symbol {
+	font-weight: 700;
+	letter-spacing: 0.05em;
+}
+
+.stocks-price {
+	font-weight: 500;
+}
+
+.stocks-change {
+	font-size: 0.9em;
+	opacity: 0.85;
+}
+
+.stocks-stale {
+	font-size: 0.75em;
+	opacity: 0.6;
+	cursor: help;
+}
+
+.stocks-untracked {
+	color: inherit;
+}
+
+/* ── Popup overlay ──────────────────────────────────────────── */
+
+.stocks-popup-overlay {
+	position: fixed;
+	inset: 0;
+	background: rgba(0, 0, 0, 0.35);
+	z-index: 9998;
+	opacity: 0;
+	transition: opacity 0.2s ease;
+	backdrop-filter: blur(2px);
+	-webkit-backdrop-filter: blur(2px);
+}
+
+/* ── Popup card ─────────────────────────────────────────────── */
+
+.stocks-popup {
+	position: fixed;
+	z-index: 9999;
+	background: #ffffff;
+	border-radius: 12px;
+	box-shadow:
+		0 20px 60px rgba(0, 0, 0, 0.15),
+		0 4px 16px rgba(0, 0, 0, 0.08);
+	width: 340px;
+	max-width: calc(100vw - 32px);
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+	font-size: 14px;
+	overflow: hidden;
+}
+
+/* ── Popup header ───────────────────────────────────────────── */
+
+.stocks-popup-header {
+	padding: 16px 20px 12px;
+	border-bottom: 1px solid #f3f4f6;
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+}
+
+.stocks-popup-header.stocks-popup-up {
+	background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+}
+
+.stocks-popup-header.stocks-popup-down {
+	background: linear-gradient(135deg, #fef2f2, #fee2e2);
+}
+
+.stocks-popup-title {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+}
+
+.stocks-popup-ticker {
+	font-size: 20px;
+	font-weight: 800;
+	letter-spacing: 0.05em;
+	color: #111827;
+	font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+}
+
+.stocks-popup-name {
+	font-size: 11px;
+	color: #6b7280;
+	font-weight: 400;
+	max-width: 210px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.stocks-popup-close {
+	background: none;
+	border: none;
+	cursor: pointer;
+	padding: 4px 6px;
+	color: #9ca3af;
+	line-height: 1;
+	border-radius: 4px;
+	transition: all 0.1s;
+	font-size: 18px;
+	flex-shrink: 0;
+}
+
+.stocks-popup-close:hover {
+	background: rgba(0, 0, 0, 0.06);
+	color: #1f2937;
+}
+
+/* ── Price section ──────────────────────────────────────────── */
+
+.stocks-popup-price-section {
+	padding: 14px 20px;
+	border-bottom: 1px solid #f3f4f6;
+}
+
+.stocks-popup-current-price {
+	font-size: 28px;
+	font-weight: 700;
+	color: #111827;
+	line-height: 1;
+	margin-bottom: 8px;
+}
+
+.stocks-popup-change {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	font-size: 13px;
+	font-weight: 600;
+}
+
+.stocks-popup-change.stocks-popup-up   { color: #16a34a; }
+.stocks-popup-change.stocks-popup-down { color: #dc2626; }
+
+.stocks-popup-change-badge {
+	display: inline-flex;
+	align-items: center;
+	font-size: 13px;
+	font-weight: 700;
+}
+
+/* ── Stats grid ─────────────────────────────────────────────── */
+
+.stocks-popup-stats {
+	padding: 14px 20px;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 10px 16px;
+	border-bottom: 1px solid #f3f4f6;
+}
+
+.stocks-popup-stat {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+}
+
+.stocks-popup-stat-label {
+	font-size: 10px;
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	color: #9ca3af;
+	font-weight: 600;
+}
+
+.stocks-popup-stat-value {
+	font-size: 12px;
+	font-weight: 600;
+	color: #374151;
+}
+
+/* ── Footer ─────────────────────────────────────────────────── */
+
+.stocks-popup-footer {
+	padding: 10px 20px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background: #f9fafb;
+}
+
+.stocks-popup-exchange {
+	font-size: 11px;
+	color: #9ca3af;
+	font-family: monospace;
+}
+
+.stocks-popup-market-state {
+	font-size: 11px;
+	padding: 2px 8px;
+	border-radius: 10px;
+	font-weight: 600;
+}
+
+.stocks-popup-market-state.market-regular {
+	background: #dcfce7;
+	color: #16a34a;
+}
+
+.stocks-popup-market-state.market-closed {
+	background: #f3f4f6;
+	color: #6b7280;
+}
+
+.stocks-popup-market-state.market-pre,
+.stocks-popup-market-state.market-post {
+	background: #fef3c7;
+	color: #d97706;
+}
+
+.stocks-popup-updated {
+	font-size: 10px;
+	color: #d1d5db;
+	padding: 4px 20px 8px;
+	text-align: right;
+	background: #f9fafb;
+}
+
+/* ── Loading state ──────────────────────────────────────────── */
+
+.stocks-ticker.stocks-loading {
+	opacity: 0.6;
+	pointer-events: none;
+}
+
+.stocks-ticker.stocks-loading .stocks-price::after {
+	content: '';
+	display: inline-block;
+	width: 8px;
+	height: 8px;
+	border: 2px solid currentColor;
+	border-top-color: transparent;
+	border-radius: 50%;
+	animation: stocks-spin 0.6s linear infinite;
+	margin-left: 4px;
+	vertical-align: middle;
+}
+
+@keyframes stocks-spin {
+	to { transform: rotate(360deg); }
+}
+
+/* ── Dark mode ──────────────────────────────────────────────── */
+
+@media (prefers-color-scheme: dark) {
+	.stocks-ticker.stocks-up {
+		background-color: #052e16;
+		border-color: #166534;
+		color: #86efac;
+	}
+
+	.stocks-ticker.stocks-up:hover {
+		background-color: #14532d;
+		border-color: #22c55e;
+	}
+
+	.stocks-ticker.stocks-down {
+		background-color: #450a0a;
+		border-color: #991b1b;
+		color: #fca5a5;
+	}
+
+	.stocks-ticker.stocks-down:hover {
+		background-color: #7f1d1d;
+		border-color: #ef4444;
+	}
+
+	.stocks-popup {
+		background: #1f2937;
+		box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 4px 16px rgba(0, 0, 0, 0.3);
+	}
+
+	.stocks-popup-header {
+		border-color: #374151;
+	}
+
+	.stocks-popup-header.stocks-popup-up {
+		background: linear-gradient(135deg, #052e16, #14532d);
+	}
+
+	.stocks-popup-header.stocks-popup-down {
+		background: linear-gradient(135deg, #450a0a, #7f1d1d);
+	}
+
+	.stocks-popup-ticker { color: #f9fafb; }
+	.stocks-popup-name   { color: #9ca3af; }
+
+	.stocks-popup-current-price { color: #f9fafb; }
+
+	.stocks-popup-price-section,
+	.stocks-popup-stats { border-color: #374151; }
+
+	.stocks-popup-stat-value { color: #e5e7eb; }
+
+	.stocks-popup-footer,
+	.stocks-popup-updated { background: #111827; }
+
+	.stocks-popup-market-state.market-closed {
+		background: #374151;
+		color: #9ca3af;
+	}
+}
+
+/* ── Responsive ─────────────────────────────────────────────── */
+
+@media (max-width: 480px) {
+	.stocks-popup {
+		width: calc(100vw - 24px);
+		border-radius: 8px;
+	}
+
+	.stocks-ticker {
+		font-size: 0.78em;
+	}
+
+	.stocks-popup-current-price {
+		font-size: 22px;
+	}
+}
