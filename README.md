@@ -2,6 +2,8 @@
 
 Embed interactive live stock price badges anywhere on your site. Badges display real-time price, change, and direction and open a full-detail popup on click — all with zero dependencies and support for four CSS frameworks.
 
+![Stocks](assets/Stocks.png)
+
 ---
 
 **Author:** Maxim Semenov  
